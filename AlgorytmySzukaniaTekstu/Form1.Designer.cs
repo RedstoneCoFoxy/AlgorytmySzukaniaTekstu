@@ -147,9 +147,9 @@ namespace AlgorytmySzukaniaTekstu
             // 
             // label_debug
             // 
-            this.label_debug.Location = new System.Drawing.Point(665, 152);
+            this.label_debug.Location = new System.Drawing.Point(557, 152);
             this.label_debug.Name = "label_debug";
-            this.label_debug.Size = new System.Drawing.Size(123, 224);
+            this.label_debug.Size = new System.Drawing.Size(231, 224);
             this.label_debug.TabIndex = 10;
             this.label_debug.Text = "...";
             // 

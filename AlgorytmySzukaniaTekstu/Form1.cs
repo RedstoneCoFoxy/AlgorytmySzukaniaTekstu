@@ -29,7 +29,7 @@ namespace AlgorytmySzukaniaTekstu
         }
 
         string Filtr = "";
-        string Tekst = "";
+        string Tekst = "ababbababbbababbaaabbb";
         private void button_Openfile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -53,10 +53,61 @@ namespace AlgorytmySzukaniaTekstu
                 }
             }
         }
+        bool search_BruteForce()
+        {
+            int i=0;
+            for (int a=0;a<Tekst.Length;a++)
+            {
+                int b = 0;
+                while (Tekst[a] == Filtr[b])
+                {
+                    b++;
+                    a++;
+                    i = a;
+                    if (b == Filtr.Length - 1)
+                    {
+                        label_debug.Text = label_debug.Text+"Powtórzenia: " + i.ToString()+"\n";
+                        return true;
+                    }
+                    
+                }
+                i= a;
+            }
+            label_debug.Text = label_debug.Text+"Powtórzenia: " + i.ToString() + "\n";
+            return false;
+        }
 
         private void button_startsearch_Click(object sender, EventArgs e)
         {
-            string Filtr = text_Filter.Text;
+            if (text_Filter.Text != "")
+            {
+                Filtr = text_Filter.Text;
+                DateTime StartTime = DateTime.Now;
+                label_debug.Text = "";
+                label_debug.Text = label_debug.Text + "Czas start: " + StartTime.ToString() + "\n";
+
+                bool found;
+                found = search_BruteForce();
+
+                if (found)
+                {
+                    label_debug.Text = label_debug.Text + "Znaleziono! \n";
+                }
+                else
+                {
+                    label_debug.Text = label_debug.Text + "Brak \n";
+                }
+
+                DateTime EndTime = DateTime.Now;
+                label_debug.Text = label_debug.Text + "Czas koniec: " + EndTime.ToString() + "\n";
+
+                TimeSpan span = EndTime - StartTime;
+                label_debug.Text = label_debug.Text + "Różnica: " + ((int)span.TotalMilliseconds).ToString() + " milisekund \n";
+            }
+            else
+            {
+                label_debug.Text = "Filtr nie moze byc pusty";
+            }
         }
     }
 }
