@@ -83,6 +83,7 @@ namespace AlgorytmySzukaniaTekstu
             this.button_Openfile.TabIndex = 4;
             this.button_Openfile.Text = "Otwórz";
             this.button_Openfile.UseVisualStyleBackColor = true;
+            this.button_Openfile.Click += new System.EventHandler(this.button_Openfile_Click);
             // 
             // radio_bruteforce
             // 
@@ -142,6 +143,7 @@ namespace AlgorytmySzukaniaTekstu
             this.button_startsearch.TabIndex = 9;
             this.button_startsearch.Text = "Start";
             this.button_startsearch.UseVisualStyleBackColor = true;
+            this.button_startsearch.Click += new System.EventHandler(this.button_startsearch_Click);
             // 
             // label_debug
             // 
