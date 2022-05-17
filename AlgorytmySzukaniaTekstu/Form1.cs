@@ -59,21 +59,119 @@ namespace AlgorytmySzukaniaTekstu
             for (int a=0;a<Tekst.Length;a++)
             {
                 int b = 0;
-                while (Tekst[a] == Filtr[b])
-                {
-                    b++;
+                while(Tekst[a] == Filtr[b]) {
                     a++;
-                    i = a;
+                    b++;
+                    if (b == Filtr.Length)
+                    {
+                        break;
+                    }
                     if (b == Filtr.Length - 1)
                     {
-                        label_debug.Text = label_debug.Text+"Powtórzenia: " + i.ToString()+"\n";
+                        i = a;
+                        label_debug.Text = label_debug.Text + "Powtórzenia: " + i.ToString() + "\n";
                         return true;
                     }
-                    
                 }
-                i= a;
+                i = a;
             }
-            label_debug.Text = label_debug.Text+"Powtórzenia: " + i.ToString() + "\n";
+            return false;
+        }
+
+        bool search_KMP()
+        {
+
+                int[] pre_suffix = new int[Filtr.Length] ;
+                pre_suffix[0] = 0;
+                int f = 0;
+                int t = 0;
+                int len = 0;
+                int z = 1;
+            int i = 0;
+                
+                while (z < Filtr.Length)
+                {
+                    if (Filtr[z] == Filtr[len])
+                    {
+                        len++;
+                        pre_suffix[z] = len;
+                        z++;
+                    }
+                    else
+                    {
+                        if (len != 0){
+                            len = pre_suffix[len - 1];
+                        }
+                        else{
+                            pre_suffix[z] = len;
+                            z++;
+                        }
+                    }
+                }
+
+
+                while (t < Tekst.Length)
+                {
+                   i++;
+                   if (Filtr[f] == Tekst[t])
+                   {
+                        f++;
+                        t++;
+                   }
+                    if (f == Filtr.Length)
+                    {
+                        label_debug.Text = label_debug.Text + "Powtórzenia: " + i.ToString() + "\n";
+                        return true;
+                    }else{
+                        if (t < Tekst.Length && Filtr[f] != Tekst[t])
+                        {
+
+                            if (f != 0)
+                                f = pre_suffix[f - 1];
+                            else
+                                t++;
+                        }
+                    }
+                }
+            
+            return false;
+        }
+
+        bool search_BoyerMoore()
+        {
+            int[] BadChar = new int[300];
+            int i = 0;
+
+            for (int z = 0; z < BadChar.Length; z++)
+            {
+                BadChar[z] = -1;
+            }
+
+            for (int z = 0; z < Filtr.Length; z++)
+            {
+                BadChar[(int)Tekst[z]] = z;
+            }
+
+            int s = 0;
+            while (s <= (Tekst.Length - Filtr.Length))
+            {
+                i++;
+                int j = Filtr.Length - 1;
+
+                while (j >= 0 && Filtr[j] == Tekst[s + j])
+                    --j;
+
+                if (j < 0)
+                {
+                    label_debug.Text = label_debug.Text + "Powtórzenia: " + i.ToString() + "\n";
+                    return true;
+                }
+                else
+                {
+                    s += Math.Max(1, j - BadChar[Tekst[s + j]]);
+                }
+            }
+
             return false;
         }
 
@@ -82,12 +180,19 @@ namespace AlgorytmySzukaniaTekstu
             if (text_Filter.Text != "")
             {
                 Filtr = text_Filter.Text;
-                DateTime StartTime = DateTime.Now;
+                DateTime EndTime = DateTime.Parse("01-01-2000");
+                DateTime StartTime = DateTime.Parse("01-01-2000");
+
+                StartTime = DateTime.Now;
                 label_debug.Text = "";
                 label_debug.Text = label_debug.Text + "Czas start: " + StartTime.ToString() + "\n";
 
-                bool found;
-                found = search_BruteForce();
+                bool found=false;
+
+                if(radio_bruteforce.Checked==true){found = search_BruteForce();};
+                if(radio_KMP.Checked==true){found = search_KMP(); };
+                if(radio_BoyerMoore.Checked==true){found = search_BoyerMoore();};
+                if(radio_RabinKarp.Checked==true){found = search_BruteForce();};
 
                 if (found)
                 {
@@ -98,11 +203,11 @@ namespace AlgorytmySzukaniaTekstu
                     label_debug.Text = label_debug.Text + "Brak \n";
                 }
 
-                DateTime EndTime = DateTime.Now;
+                EndTime = DateTime.Now;
                 label_debug.Text = label_debug.Text + "Czas koniec: " + EndTime.ToString() + "\n";
 
                 TimeSpan span = EndTime - StartTime;
-                label_debug.Text = label_debug.Text + "Różnica: " + ((int)span.TotalMilliseconds).ToString() + " milisekund \n";
+                label_debug.Text = label_debug.Text + "Różnica: " + span.ToString() +"\n";
             }
             else
             {

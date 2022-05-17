@@ -92,7 +92,6 @@ namespace AlgorytmySzukaniaTekstu
             this.radio_bruteforce.Name = "radio_bruteforce";
             this.radio_bruteforce.Size = new System.Drawing.Size(82, 19);
             this.radio_bruteforce.TabIndex = 5;
-            this.radio_bruteforce.TabStop = true;
             this.radio_bruteforce.Tag = "sortowanie";
             this.radio_bruteforce.Text = "BruteForce";
             this.radio_bruteforce.UseVisualStyleBackColor = true;
@@ -104,7 +103,6 @@ namespace AlgorytmySzukaniaTekstu
             this.radio_KMP.Name = "radio_KMP";
             this.radio_KMP.Size = new System.Drawing.Size(50, 19);
             this.radio_KMP.TabIndex = 6;
-            this.radio_KMP.TabStop = true;
             this.radio_KMP.Tag = "sortowanie";
             this.radio_KMP.Text = "KMP";
             this.radio_KMP.UseVisualStyleBackColor = true;
@@ -117,7 +115,6 @@ namespace AlgorytmySzukaniaTekstu
             this.radio_BoyerMoore.Name = "radio_BoyerMoore";
             this.radio_BoyerMoore.Size = new System.Drawing.Size(95, 19);
             this.radio_BoyerMoore.TabIndex = 7;
-            this.radio_BoyerMoore.TabStop = true;
             this.radio_BoyerMoore.Tag = "sortowanie";
             this.radio_BoyerMoore.Text = "Boyer-Moore";
             this.radio_BoyerMoore.UseVisualStyleBackColor = true;
@@ -130,7 +127,6 @@ namespace AlgorytmySzukaniaTekstu
             this.radio_RabinKarp.Name = "radio_RabinKarp";
             this.radio_RabinKarp.Size = new System.Drawing.Size(84, 19);
             this.radio_RabinKarp.TabIndex = 8;
-            this.radio_RabinKarp.TabStop = true;
             this.radio_RabinKarp.Tag = "sortowanie";
             this.radio_RabinKarp.Text = "Rabin-Karp";
             this.radio_RabinKarp.UseVisualStyleBackColor = true;
